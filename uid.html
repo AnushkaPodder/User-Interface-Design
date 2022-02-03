@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UID Assignment</title>
+</head>
+<style>
+    #img{
+        margin-left: 50px;
+        margin-top: 10px;
+    }
+    .fooditems{
+        display: flex;
+        margin-top: 10px;
+    }
+    .fooditems,.blocks,.starrating{
+        background-color: rgb(238, 221, 250);
+        border-radius: 4px;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: 5px 10px 18px #ecc062;
+    }
+    .starrating{
+        padding-bottom: 60px;
+        
+    }
+    body{
+        background-color: rgb(241, 43, 43);
+        font-size: large;
+    }   
+    input,textarea,select{
+        font-size: large;
+    } 
+    .container{
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: rgb(74, 18, 226);
+        border-radius: 4px;
+        box-shadow: 5px 10px 18px #888888;
+    }
+    .tooltip {
+  position: relative;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: beige;
+  padding: 0 5px;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.rate {
+    float: left;
+    height: 46px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:rgb(65, 60, 60);
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ecfd00;  
+      
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+</style>
+<body>
+    <div class="container">
+
+        <div class="blocks">
+            <label for="textbox">Names</label><br>
+            <textarea name="texbox" id="textbox" cols="30" rows="3"></textarea>
+        </div>
+
+        <div class="fooditems">
+            <div>
+                <label for="favdish">Favourite Dishes</label><br>
+                <input type="radio" id="Biryani" name="favdish" value="Biryani" onchange="foodSelected()">
+                <label for="Biryani">Biryani</label><br>
+                <input type="radio" id="pizza" name="favdish" value="pizza" onchange="foodSelected()">
+                <label for="pizza">pizza</label><br>
+                <input type="radio" id="burger" name="favdish" value="burger" onchange="foodSelected()">
+                <label for="burger">burger</label>
+            </div>
+            <div id="image" style="visibility: hidden;">
+                <img id="img" src="" alt="pic">
+            </div>
+        </div>
+        
+        <div class="blocks">
+            <p>Address</p>
+            <div>
+                <select id="country" name="country">
+                    <option value="" disabled selected>Select Country...</option>
+                    <option value="India">India</option>
+                    <option value="Bangladesh">Bangladesh</option>
+                    <option value="Korea">Korea</option>
+                    <option value="usa">USA</option>
+                    <option value="South Africa">South Africa</option>
+                </select>
+                <select name="state" id="state">
+                    <option value="" disabled selected>Select State...</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Haryana">Haryana</option>
+                </select>
+                <select name="city" id="city">
+                    <option value="" disabled selected>Select City...</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="London">London</option>
+                    <option value="New York">New York</option>
+                    <option value="Raipur">Raipur</option>
+                </select>
+                    
+    
+            </div>
+        </div>
+
+        <div class="blocks">
+            <p>Tootltip</p>
+            <div class="tooltip">?
+                <span class="tooltiptext">Click here to find out more</span>
+            </div>
+        </div>
+
+        <div class="starrating">
+            <div>
+                <label for="quantity">Star Rating</label>
+                <input type="number" id="quantity" name="quantity" value="0" min="1" max="5" onchange="starinput()"/>
+            </div>
+            <div class="rate">
+                <input type="radio" id="star5" name="rate" value="5" onchange="starrating()"/>
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" onchange="starrating()"/>
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" onchange="starrating()"/>
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" onchange="starrating()"/>
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" onchange="starrating()"/>
+                <label for="star1" title="text">1 star</label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function foodSelected(){
+            var k=document.getElementsByName('favdish')
+            var img = document.getElementById('img')
+            if(k[0].checked)img.src="Biryani.jpg"
+            else if(k[1].checked)img.src = "pizza.jpg";
+            else img.src="burger.jpg"
+            img.style.visibility ="visible";
+        }
+        function starrating(){
+            var k = document.getElementsByName('rate')
+            for(var i=0;i<5;i++)
+                if(k[i].checked)document.getElementById('quantity').value=(5-i)
+        }
+        function starinput(){
+            var inp = document.getElementById('quantity').value
+            var val = parseFloat(inp)
+            if(isNaN(val))return
+            if(val<0)val=0
+            else if(val>5)val=5
+            else val=Math.round(val)
+            var k = document.getElementsByName('rate')
+            if(val==0)
+                for(var i=0;i<5;i++)
+                    k[i].checked=false
+            else
+                k[5-val].checked=true
+            document.getElementById('quantity').value=val
+        }
+    </script>
+</body>
+</html>
